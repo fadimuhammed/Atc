@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATC Priority Landing Simulator - Project Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; }
+        h3 { color: #7f8c8d; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        pre { background-color: #f4f4f4; padding: 15px; border-left: 4px solid #3498db; overflow-x: auto; }
+        code { font-family: 'Courier New', monospace; }
+        .highlight { background-color: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 10px 0; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Smart Air Traffic Control Priority Landing Simulator</h1>
+    <p><strong>B.Tech CSE (Cyber Security), Batch 2025-29 | Semester III</strong></p>
+    <p><strong>Course Codes:</strong> 24CCT201 Data Structures & Algorithms, 24CCT203 OOP Java</p>
+
+    <h2>Abstract</h2>
+    <p>This project presents a Smart Air Traffic Control (ATC) Priority Landing Simulator implemented in Java, integrating principles from Data Structures and Algorithms (DSA) and Object-Oriented Programming (OOP). The system manages landing requests from commercial, cargo, and emergency aircraft using custom data structures implemented from scratch without the Java Collections Framework.</p>
+
+    <h2>1. Introduction</h2>
+    <h3>Problem Statement</h3>
+    <p>Managing aircraft landing sequences at busy airports requires efficient prioritization considering fuel levels, emergency status, wait time, and aircraft type.</p>
+
+    <h3>Objectives</h3>
+    <ul>
+        <li>Design class hierarchy using OOP concepts with proper encapsulation</li>
+        <li>Implement at least four non-trivial data structures from scratch</li>
+        <li>Apply sorting and searching algorithms with complexity analysis</li>
+        <li>Demonstrate exception handling and file persistence</li>
+    </ul>
+
+    <h2>2. Data Structures Implemented</h2>
+    
+    <h3>2.1 Array-based Priority Queue</h3>
+    <p><strong>Implementation:</strong> Binary heap in array</p>
+    <table>
+        <tr><th>Operation</th><th>Time Complexity</th><th>Space</th></tr>
+        <tr><td>Enqueue</td><td>O(log n)</td><td>O(n)</td></tr>
+        <tr><td>Dequeue</td><td>O(log n)</td><td>-</td></tr>
+        <tr><td>Peek</td><td>O(1)</td><td>-</td></tr>
+    </table>
+
+    <h3>2.2 Circular Queue</h3>
+    <p>Array-based queue with circular indexing for holding pattern management.</p>
+    <table>
+        <tr><th>Operation</th><th>Complexity</th></tr>
+        <tr><td>Enqueue/Dequeue</td><td>O(1)</td></tr>
+    </table>
+
+    <h3>2.3 Hash Table with Chaining</h3>
+    <p>Division method for hash function, linked list chaining for collisions.</p>
+    <table>
+        <tr><th>Operation</th><th>Average</th><th>Worst</th></tr>
+        <tr><td>Put/Get/Remove</td><td>O(1)</td><td>O(n)</td></tr>
+    </table>
+
+    <h3>2.4 Sorted Array Registry</h3>
+    <p>Array maintained in sorted order, supports binary search.</p>
+    <table>
+        <tr><th>Operation</th><th>Complexity</th></tr>
+        <tr><td>Binary Search</td><td>O(log n)</td></tr>
+        <tr><td>Insert</td><td>O(n)</td></tr>
+    </table>
+
+    <h3>2.5 Stack</h3>
+    <p>Linked-list based stack for undo operations. All operations O(1).</p>
+
+    <h2>3. Algorithms</h2>
+    
+    <h3>Merge Sort</h3>
+    <p>Recursive divide-and-conquer sorting. Time: O(n log n), Space: O(n)</p>
+    <pre>
+// Pseudocode
+function mergeSort(array)
+    if length <= 1 return array
+    mid = length/2
+    left = mergeSort(array[0:mid])
+    right = mergeSort(array[mid:])
+    return merge(left, right)
+    </pre>
+
+    <h3>Binary Search</h3>
+    <p>Iterative search on sorted array. Time: O(log n)</p>
+
+    <h2>4. Object-Oriented Design</h2>
+    
+    <h3>Class Hierarchy</h3>
+    <pre>
+Aircraft (abstract)
+├── CommercialFlight
+├── CargoFlight
+└── EmergencyFlight
+    </pre>
+
+    <h3>Package Structure</h3>
+    <pre>
+atc/
+├── model/           # Aircraft hierarchy, Registry, History
+├── datastructures/  # Custom DS implementations
+├── exceptions/      # Custom checked exceptions
+├── persistence/     # File I/O (JSON)
+└── util/           # FlightType enum
+    </pre>
+
+    <h2>5. Priority Scoring Algorithm</h2>
+    <p>Priority Score = w_emergency × emergencyFlag + w_fuel × (100 - fuelLevel) + w_wait × waitMinutes</p>
+    
+    <table>
+        <tr><th>Type</th><th>Emergency</th><th>Fuel</th><th>Wait</th></tr>
+        <tr><td>Commercial</td><td>1000</td><td>10</td><td>1</td></tr>
+        <tr><td>Cargo</td><td>800</td><td>15</td><td>2</td></tr>
+        <tr><td>Emergency</td><td>10000</td><td>0</td><td>0</td></tr>
+    </table>
+
+    <h2>6. Complexity Analysis Summary</h2>
+    <table>
+        <tr><th>Structure</th><th>Operation</th><th>Time</th><th>Space</th></tr>
+        <tr><td>Priority Queue</td><td>Enqueue/Dequeue</td><td>O(log n)</td><td>O(n)</td></tr>
+        <tr><td>Circular Queue</td><td>Enqueue/Dequeue</td><td>O(1)</td><td>O(n)</td></tr>
+        <tr><td>Hash Table</td><td>Put/Get</td><td>O(1) avg</td><td>O(n)</td></tr>
+        <tr><td>Sorted Array</td><td>Binary Search</td><td>O(log n)</td><td>O(n)</td></tr>
+        <tr><td>Merge Sort</td><td>Sort</td><td>O(n log n)</td><td>O(n)</td></tr>
+    </table>
+
+    <h2>7. Testing Results</h2>
+    <div class="highlight">
+        <p><strong>All Tests Passing ✅</strong></p>
+        <ul>
+            <li>Phase 1 Model Tests: 7/7 passed</li>
+            <li>Phase 2 Data Structure Tests: 6/6 passed</li>
+            <li>Phase 3 Integration Tests: 4/4 passed</li>
+        </ul>
+    </div>
+
+    <h2>8. Conclusion</h2>
+    <p>Project successfully demonstrates integration of DSA and OOP concepts. All requirements met with custom implementations from scratch.</p>
+
+    <h2>References</h2>
+    <ul>
+        <li>Syllabus: 24CST201 Data Structures and Algorithms</li>
+        <li>Syllabus: 24CST203 OOP Java</li>
+        <li>Question Paper: QP Code 24CCT201/2024/P/2</li>
+    </ul>
+</body>
+</html>

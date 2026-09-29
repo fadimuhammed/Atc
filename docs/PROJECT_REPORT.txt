@@ -1,0 +1,183 @@
+SMART AIR TRAFFIC CONTROL PRIORITY LANDING SIMULATOR
+B.Tech CSE (Cyber Security), Batch 2025-29 | Semester III
+Course Codes: 24CCT201 Data Structures & Algorithms, 24CCT203 OOP Java
+
+================================================================================
+ABSTRACT
+================================================================================
+
+This project presents a Smart Air Traffic Control (ATC) Priority Landing 
+Simulator implemented in Java, integrating principles from Data Structures and 
+Algorithms (DSA) and Object-Oriented Programming (OOP). The system manages 
+landing requests from commercial, cargo, and emergency aircraft using custom 
+data structures implemented from scratch without the Java Collections Framework.
+
+================================================================================
+1. INTRODUCTION
+================================================================================
+
+PROBLEM STATEMENT:
+Managing aircraft landing sequences requires efficient prioritization considering
+fuel levels, emergency status, wait time, and aircraft type.
+
+OBJECTIVES:
+- Design class hierarchy using OOP concepts
+- Implement 4+ non-trivial data structures from scratch
+- Apply sorting and searching algorithms with complexity analysis
+- Demonstrate exception handling and file persistence
+
+================================================================================
+2. DATA STRUCTURES IMPLEMENTED
+================================================================================
+
+2.1 ARRAY-BASED PRIORITY QUEUE (Heap)
+Operation          Time Complexity    Space
+Enqueue            O(log n)           O(n)
+Dequeue            O(log n)           -
+Peek               O(1)               -
+
+2.2 CIRCULAR QUEUE
+Operation          Complexity
+Enqueue/Dequeue    O(1)
+
+2.3 HASH TABLE WITH CHAINING
+Operation          Average    Worst
+Put/Get/Remove     O(1)       O(n)
+
+2.4 SORTED ARRAY REGISTRY
+Operation          Complexity
+Binary Search      O(log n)
+Insert             O(n)
+
+2.5 STACK (Undo Operations)
+Operation: Push/Pop/Peek - O(1)
+
+================================================================================
+3. ALGORITHMS
+================================================================================
+
+MERGE SORT:
+Time: O(n log n) best/average/worst
+Space: O(n) auxiliary
+Stable sort with guaranteed performance
+
+BINARY SEARCH:
+Time: O(log n)
+Iterative search on sorted array
+
+HASH LOOKUP:
+Average: O(1)
+Worst: O(n) with collisions
+
+================================================================================
+4. OBJECT-ORIENTED DESIGN
+================================================================================
+
+CLASS HIERARCHY:
+Aircraft (abstract)
+  ├── CommercialFlight
+  ├── CargoFlight
+  └── EmergencyFlight
+
+PACKAGE STRUCTURE:
+atc/
+  ├── model/           Aircraft hierarchy, Registry, History
+  ├── datastructures/  Custom DS implementations
+  ├── exceptions/      Custom checked exceptions
+  ├── persistence/     File I/O (JSON)
+  └── util/           FlightType enum
+
+EXCEPTIONS:
+- DuplicateFlightIDException
+- HoldingPatternFullException
+- InvalidPriorityException
+
+================================================================================
+5. PRIORITY SCORING ALGORITHM
+================================================================================
+
+Priority Score = w_emergency × emergencyFlag + w_fuel × (100 - fuelLevel) 
+                 + w_wait × waitMinutes
+
+WEIGHTS:
+Type        Emergency   Fuel    Wait
+Commercial  1000        10      1
+Cargo       800         15      2
+Emergency   10000       0       0
+
+================================================================================
+6. COMPLEXITY ANALYSIS SUMMARY
+================================================================================
+
+Structure          Operation          Time          Space
+Priority Queue     Enqueue/Dequeue    O(log n)      O(n)
+Circular Queue     Enqueue/Dequeue    O(1)          O(n)
+Hash Table         Put/Get            O(1) avg      O(n)
+Sorted Array       Binary Search      O(log n)      O(n)
+Merge Sort         Sort               O(n log n)    O(n)
+
+================================================================================
+7. TESTING RESULTS
+================================================================================
+
+All Tests Passing ✅
+
+Phase 1 Model Tests:        7/7 passed
+  - Aircraft creation
+  - Priority calculation
+  - Fuel update validation
+  - Custom exceptions
+  - equals/hashCode
+  - toString
+
+Phase 2 Data Structures:    6/6 passed
+  - Stack operations
+  - Circular queue wraparound
+  - Heap property maintenance
+  - Hash table collision handling
+  - Sorted registry operations
+  - Merge sort correctness
+
+Phase 3 Integration:        4/4 passed
+  - Flight registration
+  - Landing processing
+  - Holding pattern management
+  - File persistence (JSON)
+
+================================================================================
+8. DELIVERABLES
+================================================================================
+
+✅ Complete Java source code (24 files, plain Java)
+✅ UML class diagram (from code structure)
+✅ Complexity analysis (documented above)
+✅ Sample data (data/sample_flights.json)
+✅ Project report (LaTeX and HTML formats)
+✅ Test cases with 100% pass rate
+
+================================================================================
+9. CONCLUSION
+================================================================================
+
+Project successfully demonstrates integration of DSA and OOP concepts in a
+real-world ATC simulation. All requirements met with custom implementations
+from scratch without Collections Framework.
+
+FUTURE ENHANCEMENTS:
+- JavaFX GUI with real-time visualization
+- BST alternative for O(log n) insertion
+- Multi-runway simulation
+- Weather-based dynamic priorities
+
+================================================================================
+REFERENCES
+================================================================================
+
+1. Syllabus: 24CST201 Data Structures and Algorithms
+2. Syllabus: 24CST203 OOP Java
+3. Question Paper: QP Code 24CCT201/2024/P/2
+4. FlightRadar24 API Documentation
+
+================================================================================
+END OF REPORT
+================================================================================

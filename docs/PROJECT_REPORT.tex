@@ -1,0 +1,336 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    breaklines=true,
+    frame=single
+}
+
+\title{Smart Air Traffic Control Priority Landing Simulator}
+\author{B.Tech CSE (Cyber Security), Batch 2025-29\\Semester III}
+\date{2025-2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+
+This project presents a Smart Air Traffic Control (ATC) Priority Landing Simulator implemented in Java, integrating principles from Data Structures and Algorithms (DSA) and Object-Oriented Programming (OOP). The system manages landing requests from commercial, cargo, and emergency aircraft using custom data structures implemented from scratch without the Java Collections Framework. A priority-based queue determines landing order using a configurable scoring algorithm, while a circular queue models the holding pattern. Flight ID lookup uses a custom hash table with chaining, and binary search over a sorted registry enables efficient range queries. The design demonstrates inheritance, polymorphism, encapsulation, custom exception handling, and file persistence.
+
+\textbf{Keywords:} Air Traffic Control, Priority Queue, Hash Table, Merge Sort, Binary Search, OOP, Java
+
+\section{Introduction}
+
+\subsection{Problem Statement}
+
+Managing aircraft landing sequences at busy airports requires efficient prioritization considering multiple factors: fuel levels, emergency status, wait time, and aircraft type. Traditional ATC systems use manual sequencing, leading to inefficiencies. This project implements a menu-driven simulator for a small airport with limited runway capacity, where aircraft must be sequenced based on dynamic priority scores.
+
+\subsection{Objectives}
+
+\begin{itemize}
+    \item Design class hierarchy using OOP concepts with proper encapsulation
+    \item Implement at least four non-trivial data structures from scratch
+    \item Apply sorting and searching algorithms with complexity analysis
+    \item Demonstrate exception handling and file persistence
+    \item Create user-friendly interface using JavaFX
+\end{itemize}
+
+\subsection{Scope}
+
+The system models a single-runway airport with:
+\begin{itemize}
+    \item Flight registration, update, and cancellation
+    \item Priority-based landing scheduling
+    \item Holding pattern management
+    \item Search by Flight ID and range queries
+    \item Landing history logging with reports
+\end{itemize}
+
+\section{System Analysis and Design}
+
+\subsection{Functional Requirements}
+
+\begin{enumerate}
+    \item Register, update, and cancel flight records
+    \item Assign dynamic priority based on fuel, emergency status, wait time
+    \item Manage holding pattern with circular queue (fixed capacity)
+    \item Process landings in priority order
+    \item Search flights by ID (hash table) and by time/priority range (binary search)
+    \item Sort and display registry by ETA, fuel level, priority score
+    \item Display holding queue and next-to-land aircraft
+    \item Persist landing history to JSON file
+    \item Generate reports: emergency landings, average wait time, runway utilization
+    \item Exception handling for duplicate IDs, full holding pattern, invalid data
+\end{enumerate}
+
+\subsection{Non-Functional Requirements}
+
+\begin{itemize}
+    \item \textbf{Performance:} All operations must be $O(\log n)$ or better on average
+    \item \textbf{Reliability:} Custom exceptions for meaningful error handling
+    \item \textbf{Maintainability:} Modular design with package separation
+    \item \textbf{Scalability:} Configurable capacities for all data structures
+\end{itemize}
+
+\section{Data Structures and Algorithms}
+
+\subsection{1. Array-based Priority Queue}
+
+Implemented using binary heap structure. Elements stored in array where parent-child relationships satisfy heap property based on priority score.
+
+\textbf{Operations:}
+\begin{itemize}
+    \item Enqueue: $O(\log n)$ - bubble up
+    \item Dequeue: $O(\log n)$ - bubble down
+    \item Peek: $O(1)$
+    \item Space: $O(n)$
+\end{itemize}
+
+\textbf{Justification:} Landing order determined by dynamic priority scores. Heap provides efficient retrieval of maximum priority element with minimal overhead.
+
+\subsection{2. Circular Queue}
+
+Array-based queue with circular indexing for holding pattern management.
+
+\textbf{Operations:}
+\begin{itemize}
+    \item Enqueue/Dequeue: $O(1)$
+    \item Peek: $O(1)$
+    \item Space: $O(n)$
+\end{itemize}
+
+\textbf{Justification:} Fixed-capacity holding pattern requires FIFO behavior with constant-time operations. Circular array prevents unnecessary memory allocation.
+
+\subsection{3. Hash Table with Chaining}
+
+Custom hash table using division method for hash function and linked list chaining for collision resolution.
+
+\textbf{Operations:}
+\begin{itemize}
+    \item Put/Get/Remove: $O(1)$ average, $O(n)$ worst case
+    \item Space: $O(n)$
+\end{itemize}
+
+\textbf{Justification:} Flight ID lookup requires constant-time access. Hash table provides faster average access than binary search for single-key lookups.
+
+\subsection{4. Sorted Array Registry}
+
+Array maintained in sorted order by Flight ID, supporting binary search.
+
+\textbf{Operations:}
+\begin{itemize}
+    \item Binary Search: $O(\log n)$
+    \item Insert: $O(n)$ - requires shifting
+    \item Range Query: $O(\log n + k)$ where $k$ is result size
+    \item Space: $O(n)$
+\end{itemize}
+
+\textbf{Justification:} Range queries by Flight ID efficiently supported. Binary search significantly faster than linear search for large datasets.
+
+\subsection{5. Stack for Undo Operations}
+
+Linked-list based stack storing command history for cancellation/undo.
+
+\textbf{Operations:}
+\begin{itemize}
+    \item Push/Pop/Peek: $O(1)$
+    \item Space: $O(n)$
+\end{itemize}
+
+\subsection{6. Merge Sort}
+
+Recursive divide-and-conquer sorting algorithm applied to registry views.
+
+\textbf{Complexity:}
+\begin{itemize}
+    \item Time: $O(n \log n)$ best/average/worst
+    \item Space: $O(n)$ auxiliary
+\end{itemize}
+
+\textbf{Justification:} Stable sort with guaranteed $O(n \log n)$ worst-case performance. Suitable for sorting by multiple criteria (ETA, fuel, priority).
+
+\subsection{7. Binary Search}
+
+Iterative binary search on sorted registry.
+
+\textbf{Complexity:}
+\begin{itemize}
+    \item Time: $O(\log n)$
+\end{itemize}
+
+\textbf{Justification:} Efficient lookup for ordered data, forming foundation for range queries.
+
+\section{Object-Oriented Design}
+
+\subsection{Class Hierarchy}
+
+\begin{lstlisting}
+Aircraft (abstract)
+├── CommercialFlight
+├── CargoFlight
+└── EmergencyFlight
+\end{lstlisting}
+
+\textbf{Aircraft} contains common attributes: flightId (final), origin, destination, ETA, fuelLevel, emergencyFlag, arrivalOrder. Abstract methods: \texttt{getPriorityScore()} and \texttt{getType()}.
+
+\textbf{Inheritance:} Each subclass overrides priority calculation with type-specific weights.
+
+\textbf{Polymorphism:} Dynamic dispatch ensures correct priority calculation per aircraft type.
+
+\subsection{Package Structure}
+
+\begin{lstlisting}
+atc/
+├── model/           # Aircraft hierarchy, Registry, History
+├── datastructures/  # Custom DS implementations
+├── exceptions/      # Custom checked exceptions
+├── persistence/     # File I/O (JSON)
+└── util/           # FlightType enum
+\end{lstlisting}
+
+\subsection{Exception Handling}
+
+Custom checked exceptions:
+\begin{itemize}
+    \item \texttt{DuplicateFlightIDException}: Prevents duplicate registration
+    \item \texttt{HoldingPatternFullException}: Manages capacity constraints
+    \item \texttt{InvalidPriorityException}: Validates priority calculations
+\end{itemize}
+
+All exceptions provide meaningful messages with context data.
+
+\section{Priority Scoring Algorithm}
+
+Priority Score = $w_{emergency} \times emergencyFlag + w_{fuel} \times (100 - fuelLevel) + w_{wait} \times waitMinutes$
+
+Default weights:
+\begin{itemize}
+    \item Commercial: Emergency=1000, Fuel=10, Wait=1
+    \item Cargo: Emergency=800, Fuel=15, Wait=2
+    \item Emergency: Emergency=10000, Fuel=0, Wait=0
+\end{itemize}
+
+Emergency flights always receive maximum priority, ensuring safety.
+
+\section{Complexity Analysis}
+
+\subsection{Data Structure Operations}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|c|c|c}
+\textbf{Structure} & \textbf{Operation} & \textbf{Time} & \textbf{Space} \\
+\hline
+Priority Queue & Enqueue & $O(\log n)$ & $O(n)$ \\
+ & Dequeue & $O(\log n)$ & \\
+Circular Queue & Enqueue/Dequeue & $O(1)$ & $O(n)$ \\
+Hash Table & Put/Get & $O(1)$ avg & $O(n)$ \\
+Sorted Array & Binary Search & $O(\log n)$ & $O(n)$ \\
+ & Insert & $O(n)$ & \\
+Merge Sort & Sort & $O(n \log n)$ & $O(n)$ \\
+\end{tabular}
+\end{table}
+
+\subsection{Overall System Complexity}
+
+\begin{itemize}
+    \item Register flight: $O(\log n)$ priority queue + $O(1)$ hash table + $O(n)$ sorted insert
+    \item Process landing: $O(\log n)$ dequeue
+    \item Search by ID: $O(1)$ hash lookup
+    \item Range query: $O(\log n + k)$
+\end{itemize}
+
+\section{Implementation Details}
+
+\subsection{Key Classes}
+
+\textbf{FlightRegistry}: Coordinates all data structures, manages consistency between priority queue, hash table, and sorted registry.
+
+\textbf{LandingHistory}: Maintains landing records with statistical analysis (average wait time, fuel at landing).
+
+\textbf{FilePersistence}: Manual JSON parsing/writing without external libraries, demonstrating file I/O concepts.
+
+\subsection{Sample Data}
+
+Project includes \texttt{sample\_flights.json} with FlightRadar24-style data:
+\begin{lstlisting}
+{"flightId": "AI101", "type": "COMMERCIAL", 
+ "origin": "BOM", "destination": "DEL", 
+ "eta": "2025-01-15T14:30:00", "fuelLevel": 75, ...}
+\end{lstlisting}
+
+\section{Testing}
+
+\subsection{Unit Tests}
+
+\begin{itemize}
+    \item \textbf{Model tests}: Aircraft creation, priority calculation, equals/hashCode
+    \item \textbf{DS tests}: Stack push/pop, circular queue wraparound, heap property
+    \item \textbf{Registry tests}: Registration, landing processing, holding pattern
+    \item \textbf{File I/O tests}: JSON save/load, parse validation
+\end{itemize}
+
+All tests pass with expected outputs. Priority ordering verified: Emergency > Cargo (lower fuel) > Commercial.
+
+\section{Results and Discussion}
+
+\subsection{Performance Observations}
+
+The integrated design satisfies all requirements:
+\begin{itemize}
+    \item Emergency flights processed immediately with 10000 priority score
+    \item Holding pattern prevents runway overloading
+    \item Hash table enables instant flight ID lookup
+    \item Binary search supports efficient range queries
+\end{itemize}
+
+\subsection{Strengths}
+
+\begin{itemize}
+    \item All data structures implemented from scratch without Collections Framework
+    \item Modular design enables easy extension
+    \item Configurable priority weights allow customization
+    \item Comprehensive exception handling
+\end{itemize}
+
+\subsection{Limitations}
+
+\begin{itemize}
+    \item Sorted array insertion is $O(n)$ due to shifting
+    \item Memory usage higher than using built-in collections
+    \item Manual JSON parsing lacks robustness of libraries
+\end{itemize}
+
+\section{Conclusion and Future Scope}
+
+This project successfully demonstrates integration of DSA and OOP concepts in a real-world ATC simulation. The system efficiently manages aircraft landing priorities using custom data structures with appropriate complexity analysis.
+
+\textbf{Future enhancements:}
+\begin{itemize}
+    \item JavaFX GUI with real-time queue visualization
+    \item BST alternative to sorted array for $O(\log n)$ insertion
+    \item Multi-runway simulation with graph-based conflict detection
+    \item Weather-based dynamic priority adjustments
+\end{itemize}
+
+\section{References}
+
+\begin{enumerate}
+    \item Syllabus: 24CST201 Data Structures and Algorithms, 24CST203 OOP Java
+    \item Question Paper: QP Code 24CCT201/2024/P/2
+    \item FlightRadar24 API Documentation
+\end{enumerate}
+
+\end{document}
