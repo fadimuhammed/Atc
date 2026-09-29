@@ -1,0 +1,5 @@
+bin/
+*.class
+*.log
+data/test_output.json
+EOF
