@@ -2,4 +2,6 @@ bin/
 *.class
 *.log
 data/test_output.json
+lib/
+error log from terminal.txt
 EOF
