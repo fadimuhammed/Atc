@@ -141,8 +141,21 @@ public class FlightRegistry {
         return priorityQueue.size();
     }
 
+    public Aircraft[] getPriorityQueueContents() {
+        return priorityQueue.toArray();
+    }
+
     public int getHoldingPatternCount() {
         return holdingPattern.size();
+    }
+
+    public Aircraft[] getHoldingPatternContents() {
+        Object[] objects = holdingPattern.toArray();
+        Aircraft[] aircrafts = new Aircraft[objects.length];
+        for (int i = 0; i < objects.length; i++) {
+            aircrafts[i] = (Aircraft) objects[i];
+        }
+        return aircrafts;
     }
 
     public boolean isHoldingPatternFull() {

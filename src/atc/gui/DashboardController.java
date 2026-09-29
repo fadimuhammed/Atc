@@ -221,8 +221,8 @@ public class DashboardController {
 
     private void updateTables() {
         registryData.setAll(registry.getAllFlights());
-        // Note: Actual priority queue state would require getter methods
-        // This is simplified for demonstration
+        priorityData.setAll(registry.getPriorityQueueContents());
+        holdingData.setAll(registry.getHoldingPatternContents());
         updateStats();
     }
 
