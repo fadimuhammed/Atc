@@ -1,6 +1,8 @@
 {"flights": [
-  {"flightId": "AI101", "type": "COMMERCIAL", "origin": "BOM", "destination": "DEL", "eta": "2025-01-15T14:30:00", "fuelLevel": 75, "emergencyFlag": false, "landed": false},
-  {"flightId": "AI102", "type": "COMMERCIAL", "origin": "DEL", "destination": "BOM", "eta": "2025-01-15T16:00:00", "fuelLevel": 45, "emergencyFlag": false, "landed": false},
-  {"flightId": "CG501", "type": "CARGO", "origin": "MAA", "destination": "BLR", "eta": "2025-01-15T15:15:00", "fuelLevel": 60, "emergencyFlag": false, "landed": false},
-  {"flightId": "EM999", "type": "EMERGENCY", "origin": "HYD", "destination": "DEL", "eta": "2025-01-15T14:00:00", "fuelLevel": 10, "emergencyFlag": true, "landed": false}
+  {"flightId": "AI541", "type": "COMMERCIAL", "origin": "CCJ", "destination": "DEL", "eta": "2025-01-15T08:30:00", "fuelLevel": 80, "emergencyFlag": false, "landed": false},
+  {"flightId": "AI542", "type": "COMMERCIAL", "origin": "DEL", "destination": "CCJ", "eta": "2025-01-15T10:45:00", "fuelLevel": 65, "emergencyFlag": false, "landed": false},
+  {"flightId": "IX445", "type": "COMMERCIAL", "origin": "CCJ", "destination": "BOM", "eta": "2025-01-15T12:15:00", "fuelLevel": 70, "emergencyFlag": false, "landed": false},
+  {"flightId": "IX446", "type": "COMMERCIAL", "origin": "BOM", "destination": "CCJ", "eta": "2025-01-15T14:20:00", "fuelLevel": 55, "emergencyFlag": false, "landed": false},
+  {"flightId": "CG201", "type": "CARGO", "origin": "CCJ", "destination": "MAA", "eta": "2025-01-15T16:00:00", "fuelLevel": 75, "emergencyFlag": false, "landed": false},
+  {"flightId": "EM999", "type": "EMERGENCY", "origin": "CCJ", "destination": "CCJ", "eta": "2025-01-15T15:30:00", "fuelLevel": 8, "emergencyFlag": true, "landed": false}
 ]}
