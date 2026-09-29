@@ -3,6 +3,7 @@ package atc.gui;
 import atc.model.*;
 import atc.exceptions.DuplicateFlightIDException;
 import atc.exceptions.HoldingPatternFullException;
+import atc.util.FlightType;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -15,7 +15,6 @@ public class ATCDemoApp extends Application {
         VBox dashboard = controller.createDashboard();
         
         Scene scene = new Scene(dashboard, 1000, 800);
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         
         primaryStage.setScene(scene);
         primaryStage.show();
