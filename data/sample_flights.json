@@ -1,0 +1,6 @@
+{"flights": [
+  {"flightId": "AI101", "type": "COMMERCIAL", "origin": "BOM", "destination": "DEL", "eta": "2025-01-15T14:30:00", "fuelLevel": 75, "emergencyFlag": false, "landed": false},
+  {"flightId": "AI102", "type": "COMMERCIAL", "origin": "DEL", "destination": "BOM", "eta": "2025-01-15T16:00:00", "fuelLevel": 45, "emergencyFlag": false, "landed": false},
+  {"flightId": "CG501", "type": "CARGO", "origin": "MAA", "destination": "BLR", "eta": "2025-01-15T15:15:00", "fuelLevel": 60, "emergencyFlag": false, "landed": false},
+  {"flightId": "EM999", "type": "EMERGENCY", "origin": "HYD", "destination": "DEL", "eta": "2025-01-15T14:00:00", "fuelLevel": 10, "emergencyFlag": true, "landed": false}
+]}
