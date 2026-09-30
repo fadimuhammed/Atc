@@ -1,6 +1,6 @@
 # ATC Priority Landing Simulator - Status Log
 
-**Last Updated:** 2026-09-29 19:00 IST
+**Last Updated:** 2026-09-29 20:45 IST
 
 ---
 
@@ -24,6 +24,7 @@
 | 2026-09-29 | JavaFX GUI framework created | ✅ |
 | 2026-09-29 | JavaFX GUI compiles & runs | ✅ |
 | 2026-09-29 | JavaFX GUI tables auto-update (bug fix) | ✅ |
+| 2026-09-29 | Default capacities updated (holding: 80, priority: 10, registry: 100) | ✅ |
 | 2026-09-29 | All commits pushed to GitHub | ✅ |
 
 ---
@@ -76,12 +77,20 @@ Contains 6 flights for CCJ (Calicut International Airport):
 
 ---
 
+### Default Data Structure Capacities
+- Holding Pattern: 80 flights
+- Priority Queue: 10 flights  
+- Registry: 100 flights
+
+---
+
 ## Next Steps (Immediate)
 
 1. **Create UML diagrams** - Use IntelliJ/Eclipse or PlantUML
 2. **Generate project report PDF** - Compile LaTeX or print HTML to PDF
 3. **Viva prep** - Document key algorithms, complexity, OOP design
 4. **Test edge cases** - Full holding pattern, duplicate IDs, etc.
+5. **Test with new capacities** - Verify priority queue (10) and holding pattern (80) behavior
 
 ---
 
@@ -89,9 +98,11 @@ Contains 6 flights for CCJ (Calicut International Airport):
 
 **Remote:** `https://github.com/fadimuhammed/Atc.git`  
 **Branch:** `main`  
-**Last Push:** 2026-09-29 19:00  
+**Last Push:** 2026-09-29 20:45  
 
 **Recent Commits:**
+- `98339f4` docs: add author name (Fadi Muhammed) to project report
+- `e6488bb` fix: GUI tables now auto-update - added getPriorityQueueContents/getHoldingPatternContents to FlightRegistry, updated DashboardController.updateTables()
 - `bf44014` chore: update .gitignore for lib/ and error logs
 - `62a6672` feat: fix JavaFX GUI - remove styles.css reference, add FlightType import
 - `81899ca` feat: update sample data to CCJ airport
